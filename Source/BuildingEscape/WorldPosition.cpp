@@ -11,9 +11,7 @@ UWorldPosition::UWorldPosition()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
-
-	UE_LOG(LogTemp, Error, TEXT("In Constructor"));
+	PrimaryComponentTick.bCanEverTick = false;
 }
 
 
@@ -33,18 +31,16 @@ void UWorldPosition::BeginPlay()
 
 	//UE_LOG(LogTemp, Warning, TEXT("%s, %i, %i"), *log, l1, l2);
 
-	FString name = GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *name);
+	//FString name = GetOwner()->GetName();
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *name);
 
-	FString location = GetOwner()->GetActorLocation().ToString();
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *location);
+	//FString location = GetOwner()->GetActorLocation().ToString();
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *location);
 }
 
 
-// Called every frame
 void UWorldPosition::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
 }
 

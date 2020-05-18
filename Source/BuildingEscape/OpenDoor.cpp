@@ -20,7 +20,6 @@ void UOpenDoor::BeginPlay()
 	Super::BeginPlay();
 
 	DoorOpener = GetWorld()->GetFirstPlayerController()->GetPawn();
-
 	InitialYaw = GetOwner()->GetActorRotation().Yaw;
 	CurrentYaw = InitialYaw;
 	FinalYaw += InitialYaw;
