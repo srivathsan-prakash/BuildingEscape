@@ -15,13 +15,13 @@ class BUILDINGESCAPE_API UOpenDoor : public UActorComponent
 
 public:	
 	UOpenDoor();
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	void MoveDoor(float DeltaTime, float Target, float SpeedMultiplier);
+	int32 TotalMassOfActors() const;
 
 protected:
 	virtual void BeginPlay() override;
-
-public:	
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void MoveDoor(float DeltaTime, float Target, float SpeedMultiplier);
 
 private:
 	float DoorLastOpened = 0.0f;
@@ -38,7 +38,7 @@ private:
 	ATriggerVolume* PressurePlate;
 
 	UPROPERTY(EditAnywhere)
-	AActor* DoorOpener;
+	int32 RequiredMass = 50.0f;
 
 	UPROPERTY(EditAnywhere)
 	float OpenSpeedMultiplier = 1.0f;
