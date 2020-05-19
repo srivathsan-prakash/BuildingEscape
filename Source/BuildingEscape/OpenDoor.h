@@ -19,6 +19,7 @@ public:
 
 	void MoveDoor(float DeltaTime, float Target, float SpeedMultiplier);
 	int32 TotalMassOfActors() const;
+	void FindAudioComponent();
 
 protected:
 	virtual void BeginPlay() override;
@@ -27,6 +28,8 @@ private:
 	float DoorLastOpened = 0.0f;
 	float InitialYaw;
 	float CurrentYaw;
+	bool bOpenSoundPlayed = false;
+	bool bCloseSoundPlayed = false;
 
 	UPROPERTY(EditAnywhere)
 	float DoorCloseDelay = 0.5f;
@@ -35,7 +38,7 @@ private:
 	float FinalYaw = 90.0f;
 
 	UPROPERTY(EditAnywhere)
-	ATriggerVolume* PressurePlate;
+	ATriggerVolume* PressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	int32 RequiredMass = 50.0f;
@@ -45,4 +48,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float CloseSpeedMultiplier = 3.0f;
+
+	UPROPERTY()
+	UAudioComponent* AudioComponent = nullptr;
 };

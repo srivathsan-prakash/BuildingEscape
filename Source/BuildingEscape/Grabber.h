@@ -30,7 +30,10 @@ private:
 	FVector GetPlayersReach() const;
 	FVector GetPlayerWorldPosition() const;
 
+	UPROPERTY()
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+
+	UPROPERTY()
 	UInputComponent* InputComponent = nullptr;
 
 	UPROPERTY(EditAnywhere)

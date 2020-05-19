@@ -49,11 +49,17 @@ void UGrabber::Grab()
 
 	// if we hit something, we attach the physics handle
 	if (ComponentToGrab)
+	{
+		if (!PhysicsHandle) { return; }
+
 		PhysicsHandle->GrabComponentAtLocation(ComponentToGrab, NAME_None, GetPlayersReach());
+	}
 }
 
 void UGrabber::Release()
 {
+	if (!PhysicsHandle) { return; }
+
 	if (PhysicsHandle->GrabbedComponent)
 		PhysicsHandle->ReleaseComponent();
 }
@@ -63,6 +69,8 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// update grabbed item's location
+	if (!PhysicsHandle) { return; }
+
 	if (PhysicsHandle->GrabbedComponent)
 		PhysicsHandle->SetTargetLocation(GetPlayersReach());
 }
