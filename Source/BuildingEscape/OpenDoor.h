@@ -7,6 +7,7 @@
 #include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FDoorEvent);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BUILDINGESCAPE_API UOpenDoor : public UActorComponent
@@ -15,39 +16,28 @@ class BUILDINGESCAPE_API UOpenDoor : public UActorComponent
 
 public:	
 	UOpenDoor();
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	void MoveDoor(float DeltaTime, float Target, float SpeedMultiplier);
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	int32 TotalMassOfActors() const;
-	void FindAudioComponent();
 
 protected:
 	virtual void BeginPlay() override;
 
 private:
-	float DoorLastOpened = 0.0f;
-	float InitialYaw;
-	float CurrentYaw;
 	bool bOpenSoundPlayed = false;
 	bool bCloseSoundPlayed = false;
 
-	UPROPERTY(EditAnywhere)
-	float DoorCloseDelay = 0.5f;
+	UPROPERTY(BlueprintAssignable)
+	FDoorEvent OnOpen;
 
-	UPROPERTY(EditAnywhere)
-	float FinalYaw = 90.0f;
+	UPROPERTY(BlueprintAssignable)
+	FDoorEvent OnClose;
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
 	int32 RequiredMass = 50.0f;
-
-	UPROPERTY(EditAnywhere)
-	float OpenSpeedMultiplier = 1.0f;
-
-	UPROPERTY(EditAnywhere)
-	float CloseSpeedMultiplier = 3.0f;
 
 	UPROPERTY()
 	UAudioComponent* AudioComponent = nullptr;
